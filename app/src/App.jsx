@@ -17,9 +17,14 @@ function App() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Full Name: ${form.fullName}\nPhone: ${form.phone}\nEmail: ${form.email}`);
+    await fetch("http://localhost:5000/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+    alert("Thank you for your submission!");
   };
 
   return (
